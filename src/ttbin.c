@@ -12,7 +12,9 @@
 #include <string.h>
 #include <math.h>
 
+#ifndef NOELEVATION
 #include <curl/curl.h>
+#endif  /* NOELEVATION */
 
 #define max(a, b)   ((a) > (b) ? (a) : (b))
 
@@ -1018,6 +1020,7 @@ static size_t curl_write_data(char *ptr, size_t size, size_t nmemb, void *userda
 
 void download_elevation_data(TTBIN_FILE *ttbin)
 {
+#ifndef NOELEVATION
     CURL *curl;
     struct curl_slist *headers;
     char *post_data;
@@ -1086,6 +1089,7 @@ void download_elevation_data(TTBIN_FILE *ttbin)
     curl_easy_cleanup(curl);
     if (result != CURLE_OK)
         fprintf(stderr, "Unable to download elevation data: %d\n", result);
+#endif  /* NOELEVATION */
 }
 
 /*****************************************************************************/
